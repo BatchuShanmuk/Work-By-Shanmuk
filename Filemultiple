@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class WeatherModelFileMultiple {
+    public static void main(String[] args) throws Exception {
+        File file = new File("weather_data.txt");
+        Scanner sc = new Scanner(file);
+
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine().trim();
+            if (line.isEmpty()) continue;
+
+            String[] parts = line.split("\\s+");
+            if (parts.length != 3) continue;
+
+            double a = Double.parseDouble(parts[0]);
+            double b = Double.parseDouble(parts[1]);
+            double c = Double.parseDouble(parts[2]);
+
+            double d = b * b - 4 * a * c;
+
+            if (d >= 0) {
+                double root1 = (-b + Math.sqrt(d)) / (2 * a);
+                double root2 = (-b - Math.sqrt(d)) / (2 * a);
+                System.out.println(root1 + " " + root2);
+            } else {
+                System.out.println("No real roots");
+            }
+        }
+
+        sc.close();
+    }
+}
